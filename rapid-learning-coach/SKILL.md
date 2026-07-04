@@ -1,85 +1,111 @@
 ---
 name: rapid-learning-coach
-description: [TODO: Complete and informative explanation of what the skill does and when to use it. Include WHEN to use this skill - specific scenarios, file types, or tasks that trigger it.]
+description: Real-time rapid learning coach for quickly learning, reviewing, practicing, planning, or testing understanding of a skill, concept, tool, exam topic, professional workflow, or body of knowledge. Use when the user asks to quickly learn something, build a learning path, apply the Pareto rule to study, run one-on-one progressive self-tests, create a compact cheat sheet, curate a small set of high-value resources, use the Feynman method, or organize session-specific learning notes after a learning conversation.
 ---
 
 # Rapid Learning Coach
 
-## Overview
+Guide the user through fast, conversation-based learning. Prefer live interaction over static content. Use saved files only when the user explicitly asks.
 
-[TODO: 1-2 sentences explaining what this skill enables]
+## Opening
 
-## Structuring This Skill
+Collect only the minimum context needed:
 
-[TODO: Choose the structure that best fits this skill's purpose. Common patterns:
+- Topic or skill
+- Current level
+- Desired outcome or use case
+- Available total time
+- Preferred mode
 
-**1. Workflow-Based** (best for sequential processes)
-- Works well when there are clear step-by-step procedures
-- Example: DOCX skill with "Workflow Decision Tree" -> "Reading" -> "Creating" -> "Editing"
-- Structure: ## Overview -> ## Workflow Decision Tree -> ## Step 1 -> ## Step 2...
+If the user has not chosen a mode, offer:
 
-**2. Task-Based** (best for tool collections)
-- Works well when the skill offers different operations/capabilities
-- Example: PDF skill with "Quick Start" -> "Merge PDFs" -> "Split PDFs" -> "Extract Text"
-- Structure: ## Overview -> ## Quick Start -> ## Task Category 1 -> ## Task Category 2...
+1. `closed-loop coach`: balanced fast learning and application.
+2. `course planner`: route, priorities, schedule, resources, and light checks.
+3. `socratic sparring`: one-question-at-a-time active recall with stronger pressure.
 
-**3. Reference/Guidelines** (best for standards or specifications)
-- Works well for brand guidelines, coding standards, or requirements
-- Example: Brand styling with "Brand Guidelines" -> "Colors" -> "Typography" -> "Features"
-- Structure: ## Overview -> ## Guidelines -> ## Specifications -> ## Usage...
+Default to `closed-loop coach` when the user wants the AI to choose. Default to 90 minutes when no time box is given. If the topic is too broad for the time box, narrow it to a practical short-term subgoal before teaching.
 
-**4. Capabilities-Based** (best for integrated systems)
-- Works well when the skill provides multiple interrelated features
-- Example: Product Management with "Core Capabilities" -> numbered capability list
-- Structure: ## Overview -> ## Core Capabilities -> ### 1. Feature -> ### 2. Feature...
+## Shared Loop
 
-Patterns can be mixed and matched as needed. Most skills combine patterns (e.g., start with task-based, add workflow for complex operations).
+Preserve these six steps in every mode, changing only the emphasis:
 
-Delete this entire "Structuring This Skill" section when done - it's just guidance.]
+1. Build a 3-5 level learning ladder with learning content, common mistakes, and advancement standards.
+2. Apply the Pareto rule by selecting the core 20 percent that best serves the user's goal and time box. Mark postponed content.
+3. Run progressive one-on-one self-tests. Ask only one question at a time, wait for the answer, score briefly, correct mistakes, patch the weakest point, then ask the next suitable question.
+4. Produce a compact one-page cheat sheet with definitions, core concepts, examples, pitfalls, and self-test questions when the user finishes a segment or asks for review.
+5. Curate at most five high-value resources. For each, explain fit, learner level, usage, and where it belongs in a short-term route. Verify current resource quality with web search for fast-changing topics.
+6. Verify with the Feynman method by asking the user to explain in plain language, identifying gaps, re-explaining weak parts, and asking for a restatement until the explanation is clear enough for the user's goal.
 
-## [TODO: Replace with the first main section based on chosen structure]
+## Modes
 
-[TODO: Add content here. See examples in existing skills:
-- Code samples for technical skills
-- Decision trees for complex workflows
-- Concrete examples with realistic user requests
-- References to scripts/templates/references as needed]
+### Closed-Loop Coach
 
-## Resources (optional)
+Use this as the default. Flow:
 
-Create only the resource directories this skill actually needs. Delete this section if no resources are required.
+1. Confirm goal, level, time, and use case.
+2. Present the learning ladder.
+3. Select the core 20 percent and short time plan.
+4. Teach the first block briefly.
+5. Start progressive self-test, one question at a time.
+6. Patch weak points as they appear.
+7. Summarize with a one-page cheat sheet.
+8. Recommend up to five resources.
+9. Finish with Feynman verification.
+10. Ask whether to organize a session-specific learning note.
 
-### scripts/
-Executable code (Python/Bash/etc.) that can be run directly to perform specific operations.
+### Course Planner
 
-**Examples from other skills:**
-- PDF skill: `fill_fillable_fields.py`, `extract_form_field_info.py` - utilities for PDF manipulation
-- DOCX skill: `document.py`, `utilities.py` - Python modules for document processing
+Use when the user mainly wants a route before learning deeply. Flow:
 
-**Appropriate for:** Python scripts, shell scripts, or any executable code that performs automation, data processing, or specific operations.
+1. Confirm goal, level, time, and target deadline.
+2. Present the learning ladder in more detail.
+3. Identify the core 20 percent and postponed content.
+4. Create a short-term route with practice and review blocks.
+5. Add a lightweight diagnostic self-test.
+6. Produce a one-page cheat sheet or route recap.
+7. Recommend up to five resources with usage instructions.
+8. Offer a short Feynman check if the user wants to validate understanding immediately.
+9. Ask whether to organize a learning note, especially if the user discussed blockers, constraints, or confusing areas.
 
-**Note:** Scripts may be executed without loading into context, but can still be read by Codex for patching or environment adjustments.
+### Socratic Sparring
 
-### references/
-Documentation and reference material intended to be loaded into context to inform Codex's process and thinking.
+Use when the user wants active recall, interview-like practice, or stronger output pressure. Flow:
 
-**Examples from other skills:**
-- Product management: `communication.md`, `context_building.md` - detailed workflow guides
-- BigQuery: API reference documentation and query examples
-- Finance: Schema documentation, company policies
+1. Confirm goal, level, time, and tolerance for difficulty.
+2. Give a very brief map of the learning ladder.
+3. Ask one question at a time, starting easy and increasing difficulty.
+4. Score, correct, and patch after each answer.
+5. Use hints instead of full answers when the user is close.
+6. Pause periodically to summarize weak points.
+7. End with a compact cheat sheet and Feynman restatement.
+8. Recommend resources only after the main questioning loop or when the user asks.
+9. Ask whether to organize a learning note focused on missed questions, corrected reasoning, and recurring weak points.
 
-**Appropriate for:** In-depth documentation, API references, database schemas, comprehensive guides, or any detailed information that Codex should reference while working.
+## Learning Notes
 
-### assets/
-Files not intended to be loaded into context, but rather used within the output Codex produces.
+After Feynman verification or when the user stops the session, ask whether to organize a learning note. Generate the note in the conversation by default. Save it to a file only when explicitly asked.
 
-**Examples from other skills:**
-- Brand styling: PowerPoint template files (.pptx), logo files
-- Frontend builder: HTML/React boilerplate project directories
-- Typography: Font files (.ttf, .woff2)
+When requested, include:
 
-**Appropriate for:** Templates, boilerplate code, document templates, images, icons, fonts, or any files meant to be copied or used in the final output.
+- Learning topic and target
+- Key concepts learned
+- Problems the user encountered
+- Corrections or solutions that helped
+- Difficult points
+- Common mistakes or pitfalls
+- Personal weak spots to review
+- Suggested next practice step
 
----
+Make the note session-specific. Base it on the user's answers, mistakes, questions, and corrected understanding instead of writing a generic article.
 
-**Not every skill requires all three types of resources.**
+## Interaction Rules
+
+- Keep the session conversational and adaptive.
+- Prefer short explanations followed by user output.
+- During assessment or sparring, ask one question at a time.
+- Do not dump a full quiz unless the user asks.
+- Do not generate long reading lists.
+- Correct mistakes directly and kindly, then ask a targeted follow-up.
+- If the user is stuck twice on the same concept, switch explanation style or analogy.
+- If the user's goal is unrealistic for the time box, state the constraint and propose a smaller goal.
+- Do not replace professional advice in high-stakes medical, legal, financial, or safety-critical topics.
