@@ -2,7 +2,7 @@
 
 ## Goal
 
-Create a Codex skill named `rapid-learning-coach` that helps an AI guide a user through fast, conversation-based learning. The skill should support three selectable modes while preserving a common six-step learning loop: learning ladder, Pareto content selection, progressive self-test, one-page cheat sheet, curated resources, and Feynman verification.
+Create a Codex skill named `rapid-learning-coach` that helps an AI guide a user through fast, conversation-based learning. The skill should support three selectable modes while preserving a common six-step learning loop: learning ladder, Pareto content selection, progressive self-test, one-page cheat sheet, curated resources, and Feynman verification. After the learning loop, the skill should ask whether the user wants a learning note that records the user's actual problems, solutions, difficult points, and common mistakes from the session.
 
 The skill is intended for real-time dialogue, not file generation. It should only produce saved Markdown or other artifacts when the user explicitly asks for them.
 
@@ -104,6 +104,23 @@ Ask the user to explain the topic in plain language. Then:
 - Ask the user to restate
 - Repeat until the explanation is clear enough for the stated goal
 
+## Optional Closing Note
+
+After the learning segment ends, ask whether the user wants to organize a learning note. This should happen after Feynman verification or after the user chooses to stop the session.
+
+If the user wants a note, generate it in the conversation by default. Save it to a file only when the user explicitly asks. Include:
+
+- Learning topic and target
+- Key concepts learned
+- Problems the user encountered
+- Corrections or solutions that helped
+- Difficult points
+- Common mistakes or pitfalls
+- Personal weak spots to review
+- Suggested next practice step
+
+The note should reflect what happened in the session instead of producing a generic article.
+
 ## Mode Behavior
 
 ### Closed-Loop Coach
@@ -121,6 +138,7 @@ Flow:
 7. Summarize with a one-page cheat sheet.
 8. Recommend up to five resources.
 9. Finish with Feynman verification.
+10. Ask whether to organize a session-specific learning note.
 
 ### Course Planner
 
@@ -136,6 +154,7 @@ Flow:
 6. Produce a one-page cheat sheet or route recap.
 7. Recommend up to five resources with usage instructions.
 8. Offer a short Feynman check if the user wants to validate understanding immediately.
+9. Ask whether to organize a learning note, especially if the user discussed blockers, constraints, or confusing areas.
 
 ### Socratic Sparring
 
@@ -151,6 +170,7 @@ Flow:
 6. Pause periodically to summarize weak points.
 7. End with a compact cheat sheet and Feynman restatement.
 8. Recommend resources only after the main questioning loop or when the user asks.
+9. Ask whether to organize a learning note focused on missed questions, corrected reasoning, and recurring weak points.
 
 ## Interaction Rules
 
@@ -163,6 +183,7 @@ Flow:
 - If the user answers incorrectly, correct the mistake without shaming and then ask a targeted follow-up.
 - If the user is stuck twice on the same concept, switch explanation style or analogy.
 - If the user's goal is unrealistic for the time box, state the constraint and propose a smaller goal.
+- At the end, ask whether to organize a learning note. Keep the note grounded in the user's answers, mistakes, questions, and corrected understanding.
 
 ## Out of Scope
 
@@ -182,4 +203,6 @@ The completed skill should:
 - Enforce one-question-at-a-time behavior during tests.
 - Keep resource recommendations to five or fewer.
 - Make conversation the primary learning medium.
+- Ask whether to organize a session-specific learning note after the learning loop ends.
+- Include user-specific problems, solutions, difficult points, common mistakes, and next practice steps in that note when requested.
 - Validate cleanly with the skill creator validation script.
