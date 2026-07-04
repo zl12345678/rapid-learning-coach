@@ -1,0 +1,4 @@
+interface:
+  display_name: "Rapid Learning Coach"
+  short_description: "Fast learning with three coaching modes."
+  default_prompt: "Use $rapid-learning-coach to help me quickly learn a topic with a selectable mode."
