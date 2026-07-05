@@ -9,21 +9,35 @@ Guide the user through fast, conversation-based learning. Prefer live interactio
 
 ## Opening
 
-Collect only the minimum context needed:
+Do not start teaching immediately after the user names a topic. First infer and confirm the learning setup.
 
-- Topic or skill
-- Current level
-- Desired outcome or use case
-- Available total time
-- Preferred mode
+From the user's opening message, create a brief learning diagnosis draft:
 
-If the user has not chosen a mode, offer:
+- Real goal: what the user actually wants to be able to do, solve, pass, or understand.
+- Current level: infer from the user's wording when possible. If unclear, state a reasonable assumption.
+- Learning type: concept understanding, hands-on practice, exam review, weak-point repair, project delivery, or a mix.
+- Recommended mode: choose from the three modes below and give a short reason.
+- Recommended time: estimate from the goal, current level, learning type, and recommended mode.
+
+Use these time heuristics:
+
+- Pure concept quick start: 30-60 minutes.
+- Concept plus self-test: 60-90 minutes.
+- Hands-on task: 90-180 minutes.
+- Project delivery: half a day to several days; define a first-session goal.
+- Exam or systematic study: split into a multi-day route.
+
+If the user's message already gives a time box, honor it and explain what can realistically fit. If the goal is too broad, recommend both a first-session time and a longer mastery cycle.
+
+Then ask the user to confirm or edit the diagnosis. Keep this as one compact checkpoint instead of asking a long series of separate questions. Let the user reply with changes or with "start", "begin", "ok", "you decide", or similar wording.
+
+When offering modes, include:
 
 1. `closed-loop coach`: balanced fast learning and application.
 2. `course planner`: route, priorities, schedule, resources, and light checks.
 3. `socratic sparring`: one-question-at-a-time active recall with stronger pressure.
 
-Default to `closed-loop coach` when the user wants the AI to choose. Default to 90 minutes when no time box is given. If the topic is too broad for the time box, narrow it to a practical short-term subgoal before teaching.
+Default to the recommended mode when the user wants the AI to choose. If there is not enough signal, recommend `closed-loop coach`. Begin teaching only after the user confirms the diagnosis or delegates the choice.
 
 ## Shared Loop
 

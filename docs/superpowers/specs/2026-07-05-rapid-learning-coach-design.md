@@ -19,21 +19,35 @@ Use the skill when the user asks to quickly learn, review, practice, or understa
 
 ## Opening Flow
 
-At the start, the AI should gather the minimum information needed to teach effectively:
+At the start, the AI should not begin teaching immediately. It should first infer a compact learning diagnosis from the user's opening message, then ask the user to confirm or edit it.
 
-- Topic or skill to learn
-- Current level
-- Desired outcome or use case
-- Available total time
-- Preferred mode, if any
+The diagnosis should include:
 
-If the user does not provide a mode, offer these options and default to `closed-loop coach` when the user wants the AI to choose:
+- Real goal: what the user actually wants to be able to do, solve, pass, or understand
+- Current level: inferred from wording when possible, otherwise stated as an assumption
+- Learning type: concept understanding, hands-on practice, exam review, weak-point repair, project delivery, or a mix
+- Recommended mode, with a short reason
+- Recommended time, based on the goal, current level, learning type, and mode
+
+The AI should not ask five separate setup questions by default. It should fill what it can from the user's words, mark unclear items as assumptions, and let the user correct the diagnosis in one checkpoint.
+
+When recommending time, use these heuristics:
+
+- Pure concept quick start: 30-60 minutes
+- Concept plus self-test: 60-90 minutes
+- Hands-on task: 90-180 minutes
+- Project delivery: half a day to several days, with a first-session goal
+- Exam or systematic study: split into a multi-day route
+
+If the user provides a time box, honor it and explain what can realistically fit. If the goal is too broad, recommend both a first-session time and a longer mastery cycle.
+
+When offering modes, include:
 
 1. `closed-loop coach`: Best for learning quickly and applying the topic. Use the full six-step loop with balanced explanation, practice, testing, recap, resources, and Feynman verification.
 2. `course planner`: Best for first understanding how to learn. Emphasize the learning ladder, core 20 percent content, short-term schedule, resource route, and cheat sheet. Keep self-tests and Feynman checks light.
 3. `socratic sparring`: Best for forcing output and exposing weak understanding. Ask more than explain, use one question at a time, score and correct each answer, and end with Feynman verification.
 
-If the user does not provide total time, assume 90 minutes. If the topic is too broad for the time box, narrow it to a practical short-term subgoal before teaching.
+Default to the recommended mode when the user wants the AI to choose. If there is not enough signal, recommend `closed-loop coach`. Begin teaching only after the user confirms the diagnosis or delegates the choice.
 
 ## Shared Six-Step Loop
 
@@ -184,6 +198,7 @@ Flow:
 - If the user is stuck twice on the same concept, switch explanation style or analogy.
 - If the user's goal is unrealistic for the time box, state the constraint and propose a smaller goal.
 - At the end, ask whether to organize a learning note. Keep the note grounded in the user's answers, mistakes, questions, and corrected understanding.
+- At the beginning, infer the learning setup from the user's opening message and ask for confirmation before teaching.
 
 ## Out of Scope
 
@@ -197,9 +212,11 @@ Flow:
 The completed skill should:
 
 - Trigger for fast learning, skill acquisition, self-test, study planning, and Feynman-method requests.
-- Ask the user to choose among the three learning modes at the beginning when mode is unclear.
+- Infer the user's real goal, level, learning type, recommended mode, and recommended time from the opening message.
+- Ask the user to confirm or edit the learning diagnosis before teaching.
+- Recommend among the three learning modes at the beginning and explain why.
 - Preserve the six-step learning loop in every mode.
-- Default to closed-loop coach mode and a 90-minute time box when the user leaves choices open.
+- Recommend a suitable time box instead of blindly defaulting to 90 minutes; use `closed-loop coach` when there is not enough signal to choose a mode.
 - Enforce one-question-at-a-time behavior during tests.
 - Keep resource recommendations to five or fewer.
 - Make conversation the primary learning medium.
