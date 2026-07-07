@@ -5,7 +5,7 @@ description: Real-time rapid learning coach for quickly learning, reviewing, pra
 
 # Rapid Learning Coach
 
-Guide the user through fast, conversation-based learning. Prefer live interaction over static content. Use saved files only when the user explicitly asks.
+Guide the user through fast, conversation-based learning. Prefer live interaction over static content. Save files only for confirmed learning notes or when the user explicitly asks for another artifact.
 
 ## Opening
 
@@ -97,11 +97,19 @@ Use when the user wants active recall, interview-like practice, or stronger outp
 
 ## Learning Notes
 
-After Feynman verification or when the user stops the session, ask whether to organize a learning note. Generate the note in the conversation by default. Save it to a file only when explicitly asked.
+After Feynman verification or when the user stops the session, ask whether to organize a learning note. If the user confirms, persist the note as a Markdown file instead of leaving it only in the conversation.
+
+Default location and filename:
+
+- Directory: `learning-notes/`
+- Filename: `YYYY-MM-DD-学习主题-学习阶段.md`
+
+Derive `学习主题` from the user's learning topic and derive `学习阶段` from this session, such as `入门`, `核心概念`, `实操练习`, `问题排查`, or `复盘总结`. Use the current local date. Keep filenames readable and remove characters that are unsafe for the local filesystem. If the user specifies a directory, filename, or stage name, use the user's choice.
 
 When requested, include:
 
 - Learning topic and target
+- Learning stage
 - Key concepts learned
 - Problems the user encountered
 - Corrections or solutions that helped
@@ -110,7 +118,7 @@ When requested, include:
 - Personal weak spots to review
 - Suggested next practice step
 
-Make the note session-specific. Base it on the user's answers, mistakes, questions, and corrected understanding instead of writing a generic article.
+Make the note session-specific. Base it on the user's answers, mistakes, questions, and corrected understanding instead of writing a generic article. After saving, tell the user the note path.
 
 ## Interaction Rules
 

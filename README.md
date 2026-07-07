@@ -41,7 +41,9 @@ Every mode keeps the same six-step loop, with different emphasis:
 5. Curate at most five high-value resources.
 6. Verify understanding with the Feynman method.
 
-After the learning loop, the AI asks whether to organize a session-specific learning note. The note can record the user's actual problems, corrections, difficult points, common mistakes, weak spots, and next practice step.
+After the learning loop, the AI asks whether to organize a session-specific learning note. If the user confirms, the note is saved as a Markdown file under `learning-notes/` by default. The default filename is `YYYY-MM-DD-学习主题-学习阶段.md`.
+
+The note can record the user's actual problems, corrections, difficult points, common mistakes, weak spots, and next practice step.
 
 ### Example
 
@@ -109,6 +111,7 @@ I have 90 minutes. Help me learn enough SQL indexing to optimize slow queries.
 rapid-learning-coach/                 # Codex skill
 docs/superpowers/specs/               # Design notes
 docs/superpowers/plans/               # Implementation plan
+learning-notes/                       # Default output folder for generated learning notes
 README.md                             # Project overview
 ```
 
@@ -151,7 +154,9 @@ skill 支持三种学习方式：
 5. 筛选最多五份高价值资源。
 6. 用费曼法验证理解。
 
-学习结束后，AI 会询问是否整理本次学习笔记。笔记可以记录用户实际遇到的问题、修正方案、难点、易错点、薄弱点和下一步练习。
+学习结束后，AI 会询问是否整理本次学习笔记。如果用户确认，笔记会默认持久化保存为 `learning-notes/` 目录下的 Markdown 文件。默认文件名为 `YYYY-MM-DD-学习主题-学习阶段.md`。
+
+笔记可以记录用户实际遇到的问题、修正方案、难点、易错点、薄弱点和下一步练习。
 
 ### 示例
 
@@ -219,5 +224,6 @@ Use $rapid-learning-coach to help me quickly learn Docker deployment.
 rapid-learning-coach/                 # Codex skill
 docs/superpowers/specs/               # 设计说明
 docs/superpowers/plans/               # 实施计划
+learning-notes/                       # 生成学习笔记的默认输出目录
 README.md                             # 项目说明
 ```

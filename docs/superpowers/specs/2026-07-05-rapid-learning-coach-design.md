@@ -2,9 +2,9 @@
 
 ## Goal
 
-Create a Codex skill named `rapid-learning-coach` that helps an AI guide a user through fast, conversation-based learning. The skill should support three selectable modes while preserving a common six-step learning loop: learning ladder, Pareto content selection, progressive self-test, one-page cheat sheet, curated resources, and Feynman verification. After the learning loop, the skill should ask whether the user wants a learning note that records the user's actual problems, solutions, difficult points, and common mistakes from the session.
+Create a Codex skill named `rapid-learning-coach` that helps an AI guide a user through fast, conversation-based learning. The skill should support three selectable modes while preserving a common six-step learning loop: learning ladder, Pareto content selection, progressive self-test, one-page cheat sheet, curated resources, and Feynman verification. After the learning loop, the skill should ask whether the user wants a learning note that records the user's actual problems, solutions, difficult points, and common mistakes from the session. If the user confirms, the note should be persisted as a Markdown file.
 
-The skill is intended for real-time dialogue, not file generation. It should only produce saved Markdown or other artifacts when the user explicitly asks for them.
+The skill is intended for real-time dialogue first. It should persist final learning notes after user confirmation, and only produce other saved artifacts when the user explicitly asks for them.
 
 ## Trigger Scope
 
@@ -122,9 +122,17 @@ Ask the user to explain the topic in plain language. Then:
 
 After the learning segment ends, ask whether the user wants to organize a learning note. This should happen after Feynman verification or after the user chooses to stop the session.
 
-If the user wants a note, generate it in the conversation by default. Save it to a file only when the user explicitly asks. Include:
+If the user wants a note, persist it as a Markdown file. Use:
+
+- Default directory: `learning-notes/`
+- Default filename: `YYYY-MM-DD-学习主题-学习阶段.md`
+
+The AI should derive `学习主题` from the learning topic and derive `学习阶段` from this session, such as `入门`, `核心概念`, `实操练习`, `问题排查`, or `复盘总结`. Use the current local date. Keep filenames readable and remove characters that are unsafe for the local filesystem. If the user specifies a directory, filename, or stage name, use the user's choice.
+
+Include:
 
 - Learning topic and target
+- Learning stage
 - Key concepts learned
 - Problems the user encountered
 - Corrections or solutions that helped
@@ -133,7 +141,7 @@ If the user wants a note, generate it in the conversation by default. Save it to
 - Personal weak spots to review
 - Suggested next practice step
 
-The note should reflect what happened in the session instead of producing a generic article.
+The note should reflect what happened in the session instead of producing a generic article. After saving, tell the user the note path.
 
 ## Mode Behavior
 
@@ -203,7 +211,7 @@ Flow:
 ## Out of Scope
 
 - Building a full course platform.
-- Automatically creating files unless requested.
+- Automatically creating files other than confirmed final learning notes.
 - Recommending large libraries of resources.
 - Replacing professional advice in high-stakes domains such as medical, legal, financial, or safety-critical topics.
 
@@ -222,4 +230,5 @@ The completed skill should:
 - Make conversation the primary learning medium.
 - Ask whether to organize a session-specific learning note after the learning loop ends.
 - Include user-specific problems, solutions, difficult points, common mistakes, and next practice steps in that note when requested.
+- Persist confirmed learning notes as Markdown files under `learning-notes/` by default, using `YYYY-MM-DD-学习主题-学习阶段.md`.
 - Validate cleanly with the skill creator validation script.
